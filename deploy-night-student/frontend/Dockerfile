@@ -1,14 +1,8 @@
 FROM nginx:1.27-alpine
 
-# CHECKPOINT 2 - FRONTEND
-# L'image de base est imposee pour que tous les groupes travaillent dans le meme environnement.
-# A vous de servir l'interface statique avec Nginx.
-#
-# Votre image doit :
-# - copier index.html, app.js, styles.css et assets/ dans l'emplacement servi par Nginx ;
-# - documenter le port sur lequel Nginx ecoute dans le container.
-#
-# Si vous ne connaissez pas le repertoire web par defaut de l'image Nginx officielle,
-# cherchez-le dans la documentation ou inspectez l'image. Ne devinez pas.
+COPY index.html /usr/share/nginx/html/index.html
+COPY app.js /usr/share/nginx/html/app.js
+COPY styles.css /usr/share/nginx/html/styles.css
+COPY assets/ /usr/share/nginx/html/assets/
 
-# TODO_STUDENT
+EXPOSE 80

@@ -22,6 +22,7 @@ grep -q 'Game Night - Ops Console' /tmp/game-night-front.html \
   || fail "Nginx repond, mais l interface Game Night n est pas presente (page Nginx par defaut ?)"
 curl -fsS http://localhost:3901/styles.css >/dev/null 2>&1 || fail "styles.css n est pas servi"
 curl -fsS http://localhost:3901/app.js >/dev/null 2>&1 || fail "app.js n est pas servi"
-curl -fsS http://localhost:3901/assets/game-1.jpg >/dev/null 2>&1 || fail "les visuels du frontend ne sont pas servis"
-ok "interface Game Night et fichiers statiques servis par Nginx"
+docker exec game-night-front-check \
+  wget -qO /dev/null http://127.0.0.1/assets/game-1.jpg \
+  || fail "les visuels du frontend ne sont pas servis"ok "interface Game Night et fichiers statiques servis par Nginx"
 printf 'Checkpoint valide.\n'
